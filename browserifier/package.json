@@ -1,0 +1,19 @@
+{
+  "name": "browserifier",
+  "version": "0.0.0",
+  "description": "make browser globals from npm modules",
+  "main": "index",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "browserifier": "index.js"
+  },
+  "author": "Nick Bottomley",
+  "license": "MIT",
+  "dependencies": {
+    "npm": "^1.4.6",
+    "browserify": "^3.39.0"
+  },
+  "devDependencies": {}
+}

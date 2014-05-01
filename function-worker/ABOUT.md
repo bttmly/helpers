@@ -1,0 +1,1 @@
+Simple CoffeeScript class for creating and running a Web Worker from an existing function.

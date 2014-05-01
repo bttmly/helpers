@@ -1,0 +1,1 @@
+A little Node CLI program that creates browser-ready scripts from NPM modules. Run `nom install` before using 

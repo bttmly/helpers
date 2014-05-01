@@ -1,0 +1,1 @@
+Many modules use this pattern to allow for usage flexibility. Allows require, AMD, browser global. Replace "Module" with module name.

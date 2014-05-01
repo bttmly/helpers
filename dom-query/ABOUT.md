@@ -1,0 +1,1 @@
+Vanilla JS function for querying the DOM. Always returns a regular array.

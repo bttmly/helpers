@@ -1,0 +1,45 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+
+  <script src="fn-worker.js"></script>
+  <script>
+
+    var longRun = function(s, l, base) {
+      var i, j, makeId, _i, _j;
+      if (base == null) {
+        base = [];
+      }
+      makeId = function(l) {
+        var i, possible, text;
+        text = "";
+        possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        i = 0;
+        while (i < l) {
+          text += possible.charAt(Math.floor(Math.random() * possible.length));
+          i++;
+        }
+        return text;
+      };
+      if (s === 0) {
+        for (j = _i = 0; 0 <= l ? _i <= l : _i >= l; j = 0 <= l ? ++_i : --_i) {
+          base[j] = makeId(l);
+        }
+      } else {
+        for (i = _j = 0; 0 <= s ? _j <= s : _j >= s; i = 0 <= s ? ++_j : --_j) {
+          base[i] = [];
+          longRun(s - 1, l, base[i]);
+        }
+      }
+      return base;
+    };
+
+    var w = new FunctionWorker( longRun, "longRun" );
+
+    
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,1 @@
+Similar to jQuery.css(), but without jQuery. Get or set properly prefixed CSS properties.

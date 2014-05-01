@@ -1,0 +1,1 @@
+window.DeepExtend = require( 'deep-extend' );
