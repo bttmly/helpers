@@ -1,0 +1,101 @@
+<html>
+<head>
+  <title></title>
+  <style type="text/css">
+
+    *, *:before, *:after {
+      box-sizing: border-box;
+    }
+
+    body,
+    html {
+      padding: 0;
+      margin: 0;
+    }
+
+    #log {
+      width: 40em;
+      max-width: 96%;
+      max-width: -webkit-calc( 100% - 2em );
+      max-width: calc( 100% - 2em);
+      margin: 1em auto;
+      height: 96vh;
+      height: -webkit-calc( 100vh - 2em );
+      height: calc( 100% - 2em );
+      overflow-y: scroll;
+      padding: 1em;
+      font-family: "Source Code Pro", monospace;
+      border: 1px solid #888;
+    }
+
+    #log p {
+      margin: 0;
+      padding: .5em;
+      border-bottom: 1px solid #aaa;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div id="log">
+
+  <div>
+
+  <script src="./composition.js"></script>
+  <script>
+    
+    ( function() {
+
+      var Log = {};
+      Log.el = document.querySelector( "#log" );
+      Log.print = function( message, type ) {
+        var p = document.createElement( "p" );
+        p.classList.add( "console-" + type );
+        p.innerHTML = message;
+        //Log.el.insertBefore( p, Log.el.firstChild );
+        Log.el.appendChild( p );
+      };
+
+      // hijack console.log so it prints to our log too.
+      window.console.log = ( function( w ) {
+        var prevConsoleLog = console.log;
+        return function () {
+          Array.prototype.slice.call( arguments ).forEach( function( arg ) {
+            Log.print( arg, "log" );
+          });
+          prevConsoleLog.apply( console, arguments );
+        }
+      }( window ));
+
+      var c = new C();
+      c.aMethod();
+      c.bMethod();
+
+      var d = new D();
+      d.addEventListener( "someEvent", function( event ) {
+        console.log( this );
+      }, false)
+      var evt = new Event( "someEvent" );
+      d.dispatchEvent( evt );
+
+      // we'll add these to window so we can inspect them.
+      var exports = {
+        cInstance: c,
+        dInstance: d
+      };
+
+      for ( var key in exports ) {
+        if ( exports.hasOwnProperty( key ) ) {
+          window[key] = exports[key]
+        }
+      }
+
+    }());
+
+
+  </script>
+
+</body>
+</html>

@@ -1,1 +1,0 @@
-window.NodeGithub = require( 'node-github' );

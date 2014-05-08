@@ -1,1 +1,0 @@
-window.underscore = require( 'underscore' );
