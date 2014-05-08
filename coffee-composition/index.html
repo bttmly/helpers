@@ -43,7 +43,8 @@
 
   <div>
 
-  <script src="./composition.js"></script>
+  <script src="./compose.js"></script>
+  <script src="./classes.js"></script>
   <script>
     
     ( function() {
@@ -53,9 +54,8 @@
       Log.print = function( message, type ) {
         var p = document.createElement( "p" );
         p.classList.add( "console-" + type );
-        p.innerHTML = message;
-        //Log.el.insertBefore( p, Log.el.firstChild );
-        Log.el.appendChild( p );
+        p.innerHTML = message.toString().split( " {" )[0]
+        Log.el.insertBefore( p, Log.el.firstChild );
       };
 
       // hijack console.log so it prints to our log too.
@@ -68,29 +68,6 @@
           prevConsoleLog.apply( console, arguments );
         }
       }( window ));
-
-      var c = new C();
-      c.aMethod();
-      c.bMethod();
-
-      var d = new D();
-      d.addEventListener( "someEvent", function( event ) {
-        console.log( this );
-      }, false)
-      var evt = new Event( "someEvent" );
-      d.dispatchEvent( evt );
-
-      // we'll add these to window so we can inspect them.
-      var exports = {
-        cInstance: c,
-        dInstance: d
-      };
-
-      for ( var key in exports ) {
-        if ( exports.hasOwnProperty( key ) ) {
-          window[key] = exports[key]
-        }
-      }
 
     }());
 
